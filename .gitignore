@@ -1,0 +1,14 @@
+*.class    
+target/
+.settings/
+.projects
+.classes
+.springbeans
+.idea
+*.iml
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
