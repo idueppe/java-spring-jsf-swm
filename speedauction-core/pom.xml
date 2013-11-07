@@ -24,10 +24,10 @@
 		<spring.version>3.2.3.RELEASE</spring.version>
 	</properties>
 
-	
+
 
 	<dependencies>
-		
+
 		<!-- Dependencies for Spring -->
 
 		<dependency>
@@ -35,25 +35,25 @@
 			<artifactId>spring-context</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
@@ -79,7 +79,7 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.5.6</version>
 		</dependency>
-		
+
 
 		<!-- Dependency for Dynamic Proxies -->
 
@@ -89,9 +89,9 @@
 			<version>2.2.2</version>
 		</dependency>
 
-		
+
 		<!-- Dependencies for JPA / Hibernate -->
-		
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
@@ -122,16 +122,15 @@
 			<version>5.1.22</version>
 		</dependency>
 
-		
 		<!-- Dependencies for Testing -->
-		
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
@@ -144,8 +143,8 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.1</version>
 		</dependency>
-		
-		
+
+
 	</dependencies>
 
 

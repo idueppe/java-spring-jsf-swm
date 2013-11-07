@@ -1,5 +1,6 @@
 package de.swm.auction.dao.inmemory;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +13,6 @@ import de.swm.auction.model.ProductDetails;
 
 public class ProductRepositoryBean implements ProductRepository
 {
-	
 	private Map<Long, Product> store = new HashMap<>();
 
 	@Override
@@ -25,7 +25,11 @@ public class ProductRepositoryBean implements ProductRepository
 	@Override
 	public void merge(Product product)
 	{
-		store.put(product.getId(), product);
+		Product previous = store.put(product.getId(), product);
+		if (previous != null)
+		{
+			System.out.println("Removed "+previous);
+		}
 	}
 
 	@Override
@@ -41,6 +45,7 @@ public class ProductRepositoryBean implements ProductRepository
 		{
 			throw new ProductNotFoundException(productId);
 		}
+		// FIXME wir wissen nicht ob es wirklich ein ProductDetails Objekt ist.
 		return (ProductDetails) store.get(productId);
 	}
 	@Override
@@ -48,5 +53,17 @@ public class ProductRepositoryBean implements ProductRepository
 	{
 		return new LinkedList<>(store.values());
 	}
+	
+	public Map<Long, Product> getStore()
+	{
+		return Collections.unmodifiableMap(store);
+	}
+
+	public void setStore(Map<Long, Product> store)
+	{
+		this.store.clear();
+		this.store.putAll(store);
+	}
+
 
 }
