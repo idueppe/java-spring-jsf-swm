@@ -31,7 +31,7 @@ public class ProductRepositoryFileBeanTest
 	@After
 	public void tearDown()
 	{
-		new File("./product.data").delete();
+		new File("./target/product.data").delete();
 	}
 	
 	@Test
