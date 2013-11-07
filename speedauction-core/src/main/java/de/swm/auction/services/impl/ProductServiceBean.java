@@ -1,15 +1,23 @@
 package de.swm.auction.services.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import de.swm.auction.dao.ProductRepository;
 import de.swm.auction.exceptions.ProductNotFoundException;
 import de.swm.auction.model.Product;
 import de.swm.auction.model.ProductDetails;
+import de.swm.auction.services.AuctionService;
 import de.swm.auction.services.ProductService;
 
+@Component("productService")
 public class ProductServiceBean implements ProductService
 {
+	@Autowired
+	private ProductRepository productRepository; 
 	
-	private ProductRepository productRepository;
+	@Autowired
+	private AuctionService auctionService;
 	
 	@Override
 	public Long registerProduct(String title, String description)

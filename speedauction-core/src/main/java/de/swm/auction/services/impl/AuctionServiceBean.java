@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import de.swm.auction.api.AuctionState;
 import de.swm.auction.dao.AuctionRepository;
 import de.swm.auction.dtos.AuctionDTO;
@@ -18,11 +21,13 @@ import de.swm.auction.model.Product;
 import de.swm.auction.services.AuctionService;
 import de.swm.auction.services.ProductService;
 
+@Component("auctionService")
 public class AuctionServiceBean implements AuctionService
 {
-	
+	@Autowired
 	private AuctionRepository auctionRepository;
 	
+	@Autowired
 	private ProductService productService;
 
 	@Override
@@ -117,6 +122,7 @@ public class AuctionServiceBean implements AuctionService
 	
 	public void setProductService(ProductService productService)
 	{
+		System.out.println("--------------------------- SET PRODUCT SERVICE -----------");
 		this.productService = productService;
 	}
 }

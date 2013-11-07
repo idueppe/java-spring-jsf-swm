@@ -5,11 +5,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
 import de.swm.auction.api.AuctionState;
 import de.swm.auction.dao.AuctionRepository;
 import de.swm.auction.exceptions.AuctionNotFoundException;
 import de.swm.auction.model.Auction;
 
+@Component()
 public class AuctionRepositoryBean implements AuctionRepository
 {
 	

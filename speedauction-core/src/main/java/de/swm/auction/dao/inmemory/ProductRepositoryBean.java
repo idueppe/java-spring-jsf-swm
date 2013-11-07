@@ -6,11 +6,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
 import de.swm.auction.dao.ProductRepository;
 import de.swm.auction.exceptions.ProductNotFoundException;
 import de.swm.auction.model.Product;
 import de.swm.auction.model.ProductDetails;
 
+@Component()
 public class ProductRepositoryBean implements ProductRepository
 {
 	private Map<Long, Product> store = new HashMap<>();
