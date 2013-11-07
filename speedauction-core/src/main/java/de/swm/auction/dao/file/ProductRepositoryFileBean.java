@@ -1,5 +1,6 @@
 package de.swm.auction.dao.file;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,20 +21,26 @@ public class ProductRepositoryFileBean implements ProductRepository
 {
 
 	public static final String PRODUCT_DATA_FILENAME = "/tmp/product.data";
-	
+
 	private ProductRepositoryBean delegate;
-	
-	public ProductRepositoryFileBean()
-	{}
-	
+	private File productFile;
+
 	public ProductRepositoryFileBean(ProductRepositoryBean delegate)
 	{
+		System.out.println("---- Construct ProductRepositoryFileBean ");
 		this.delegate = delegate;
+	}
+
+	public ProductRepositoryFileBean(ProductRepositoryBean delegate, File productFile)
+	{
+		System.out.println("---- Construct ProductRepositoryFileBean with " + productFile.getName());
+		this.delegate = delegate;
+		this.productFile = productFile;
 	}
 
 	private void safeToFile()
 	{
-		try (FileOutputStream fos = new FileOutputStream(PRODUCT_DATA_FILENAME);
+		try (FileOutputStream fos = new FileOutputStream(productFile);
 				GZIPOutputStream zos = new GZIPOutputStream(fos);
 				ObjectOutputStream oos = new ObjectOutputStream(zos);)
 		{
@@ -48,15 +55,17 @@ public class ProductRepositoryFileBean implements ProductRepository
 	@SuppressWarnings("unchecked")
 	private void readFromFile()
 	{
-		try (FileInputStream fis = new FileInputStream(PRODUCT_DATA_FILENAME); 
-				GZIPInputStream zis = new GZIPInputStream(fis);
-				ObjectInputStream ois = new ObjectInputStream(zis); 
-		)
+		if (productFile.exists())
 		{
-			delegate.setStore((Map<Long, Product>) ois.readObject());
-		} catch (IOException | ClassNotFoundException e)
-		{
-			e.printStackTrace();
+			try (FileInputStream fis = new FileInputStream(productFile);
+					GZIPInputStream zis = new GZIPInputStream(fis);
+					ObjectInputStream ois = new ObjectInputStream(zis);)
+			{
+				delegate.setStore((Map<Long, Product>) ois.readObject());
+			} catch (IOException | ClassNotFoundException e)
+			{
+				e.printStackTrace();
+			}
 		}
 	}
 

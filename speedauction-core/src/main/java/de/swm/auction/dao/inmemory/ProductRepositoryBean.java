@@ -17,6 +17,11 @@ import de.swm.auction.model.ProductDetails;
 public class ProductRepositoryBean implements ProductRepository
 {
 	private Map<Long, Product> store = new HashMap<>();
+	
+	public ProductRepositoryBean()
+	{
+		System.out.println("---- Construct ProductRepositoryBean");
+	}
 
 	@Override
 	public void persist(Product product)
