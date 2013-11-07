@@ -10,7 +10,7 @@
 <!-- 		<constructor-arg> -->
 <!-- 			<bean class="de.swm.auction.dao.inmemory.ProductRepositoryBean"/>  -->
 <!-- 		</constructor-arg> -->
-		<constructor-arg value="product.data"/>
+		<constructor-arg value="target/product.data"/>
 	</bean>
 
 
