@@ -7,9 +7,9 @@
 	
 	<bean id="productRepositoryFile" class="de.swm.auction.dao.file.ProductRepositoryFileBean">
 		<constructor-arg ref="productRepository" />
-		<constructor-arg>
-			<bean class="de.swm.auction.dao.inmemory.ProductRepositoryBean"/> 
-		</constructor-arg>
+<!-- 		<constructor-arg> -->
+<!-- 			<bean class="de.swm.auction.dao.inmemory.ProductRepositoryBean"/>  -->
+<!-- 		</constructor-arg> -->
 		<constructor-arg value="target/product.data"/>
 	</bean>
 
