@@ -1,5 +1,7 @@
 package de.swm.auction.exceptions;
 
+import org.springframework.dao.EmptyResultDataAccessException;
+
 
 public class ProductNotFoundException extends ApplicationException
 {
@@ -8,6 +10,11 @@ public class ProductNotFoundException extends ApplicationException
 	public ProductNotFoundException(Long productId)
 	{
 		super("Product with Id "+productId+" not found.");
+	}
+
+	public ProductNotFoundException(Long productId, EmptyResultDataAccessException ex)
+	{
+		super("Product with Id "+productId+" not found.", ex);
 	}
 
 }
