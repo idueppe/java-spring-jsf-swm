@@ -17,12 +17,12 @@ import de.swm.auction.model.ProductDetails;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/applicationContext-db.xml")
+//@ContextConfiguration({"/applicationContext-db.xml","/applicationContext-db-test.xml"})
 public class ProductRepositoryTest
 {
 
 	@Autowired
 	private ProductRepository productRepository; 
-	
 
 	@Test
 	public void testThatProductIdIsSetAfterPersist()
