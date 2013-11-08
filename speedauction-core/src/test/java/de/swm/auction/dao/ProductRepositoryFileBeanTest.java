@@ -11,7 +11,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import de.swm.auction.exceptions.ProductNotFoundException;
-import de.swm.auction.model.Product;
 import de.swm.auction.model.ProductDetails;
 
 public class ProductRepositoryFileBeanTest
@@ -37,7 +36,7 @@ public class ProductRepositoryFileBeanTest
 	@Test
 	public void testPersist()
 	{
-		Product product = new ProductDetails();
+		ProductDetails product = new ProductDetails();
 		repository.persist(product);
 		assertNotNull(product.getId());
 	}
@@ -45,7 +44,7 @@ public class ProductRepositoryFileBeanTest
 	@Test
 	public void testFind() throws ProductNotFoundException
 	{
-		Product product = new ProductDetails();
+		ProductDetails product = new ProductDetails();
 		repository.persist(product);
 		assertNotNull(repository.find(product.getId()));
 	}
@@ -55,7 +54,5 @@ public class ProductRepositoryFileBeanTest
 	{
 		repository.find(-1l);
 	}
-
-
 	
 }
