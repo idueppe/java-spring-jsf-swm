@@ -9,9 +9,9 @@ import de.swm.auction.model.ProductDetails;
 public interface ProductRepository
 {
 
-	public void persist(Product product);
+	public void persist(ProductDetails product);
 	
-	public void merge(Product product);
+	public void merge(ProductDetails product);
 
 	public void delete(Long productId);
 

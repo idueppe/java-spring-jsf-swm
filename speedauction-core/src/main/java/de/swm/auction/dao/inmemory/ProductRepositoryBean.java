@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.stereotype.Component;
 
 import de.swm.auction.dao.ProductRepository;
@@ -22,16 +24,21 @@ public class ProductRepositoryBean implements ProductRepository
 	{
 		System.out.println("---- Construct ProductRepositoryBean");
 	}
+	
+	@PostConstruct
+	public void doSomethingImportantAfterGotAllDependencies()
+	{
+	}
 
 	@Override
-	public void persist(Product product)
+	public void persist(ProductDetails product)
 	{
 		product.setId(RepositoryUtils.nextId());
 		store.put(product.getId(), product);
 	}
 
 	@Override
-	public void merge(Product product)
+	public void merge(ProductDetails product)
 	{
 		Product previous = store.put(product.getId(), product);
 		if (previous != null)

@@ -11,6 +11,9 @@ import java.util.Map;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import de.swm.auction.dao.ProductRepository;
 import de.swm.auction.dao.inmemory.ProductRepositoryBean;
 import de.swm.auction.exceptions.ProductNotFoundException;
@@ -24,7 +27,24 @@ public class ProductRepositoryFileBean implements ProductRepository
 
 	private ProductRepositoryBean delegate;
 	private File productFile;
+	
+	@PostConstruct
+	public void init() 
+	{
+		System.out.println("Bin mit File "+productFile.getName()+ " verbunden.");
+		if (productFile.exists())
+			readFromFile();
+	}
+	
+	@PreDestroy
+	public void close()
+	{
+		System.out.println("Close file now.");
+	}
 
+	public ProductRepositoryFileBean()
+	{}
+	
 	public ProductRepositoryFileBean(ProductRepositoryBean delegate)
 	{
 		System.out.println("---- Construct ProductRepositoryFileBean ");
@@ -69,14 +89,14 @@ public class ProductRepositoryFileBean implements ProductRepository
 		}
 	}
 
-	public void persist(Product product)
+	public void persist(ProductDetails product)
 	{
 		readFromFile();
 		delegate.persist(product);
 		safeToFile();
 	}
 
-	public void merge(Product product)
+	public void merge(ProductDetails product)
 	{
 		readFromFile();
 		delegate.merge(product);
@@ -100,6 +120,21 @@ public class ProductRepositoryFileBean implements ProductRepository
 	{
 		readFromFile();
 		return delegate.findAll();
+	}
+
+	public ProductRepositoryBean getDelegate()
+	{
+		return delegate;
+	}
+
+	public void setDelegate(ProductRepositoryBean delegate)
+	{
+		this.delegate = delegate;
+	}
+
+	public void setProductFile(File productFile)
+	{
+		this.productFile = productFile;
 	}
 
 }
