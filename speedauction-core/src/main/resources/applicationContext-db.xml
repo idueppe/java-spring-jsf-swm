@@ -28,6 +28,5 @@
 	<bean id="productRepository" class="de.swm.auction.dao.jdbc.ProductRepositoryJdbcBean">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
-	
 
 </beans>
