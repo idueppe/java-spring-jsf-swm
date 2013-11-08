@@ -36,7 +36,6 @@ public class JdbcTest
 				pStmt.setString(2, "Product Titel " + i);
 				pStmt.setString(3, "Product Description " + i);
 				pStmt.addBatch();
-
 			}
 			int[] update = pStmt.executeBatch();
 			System.out.println("Zeilen eingefügt " + Arrays.toString(update));
