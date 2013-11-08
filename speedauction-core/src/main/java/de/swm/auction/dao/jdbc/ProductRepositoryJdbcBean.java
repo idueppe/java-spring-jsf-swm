@@ -40,12 +40,13 @@ public class ProductRepositoryJdbcBean implements ProductRepository
 			pStmt.execute();
 		} catch (SQLException e)
 		{
+			System.out.println("--|" + e.getErrorCode());
 			throw new SystemException("Coudn't persist product.", e);
 		}
 	}
 
 	@Override
-	public void merge(ProductDetails product)
+	public void merge(ProductDetails product) throws ProductNotFoundException
 	{
 		try (Connection connection = dataSource.getConnection(); //
 				PreparedStatement pStmt = connection.prepareStatement(UPDATE_SQL);)
@@ -53,7 +54,10 @@ public class ProductRepositoryJdbcBean implements ProductRepository
 			pStmt.setString(1, product.getTitle());
 			pStmt.setString(2, product.getDescription());
 			pStmt.setLong(3, product.getId());
-			pStmt.execute();
+			if (pStmt.executeUpdate() == 0)
+			{
+				throw new ProductNotFoundException(product.getId());
+			}
 		} catch (SQLException e)
 		{
 			throw new SystemException("Coudn't persist product.", e);
@@ -61,14 +65,16 @@ public class ProductRepositoryJdbcBean implements ProductRepository
 	}
 
 	@Override
-	public void delete(Long productId)
+	public void delete(Long productId) throws ProductNotFoundException
 	{
 		try (Connection connection = dataSource.getConnection(); //
 				PreparedStatement pStmt = connection.prepareStatement(DELETE_SQL);)
 		{
 			pStmt.setLong(1, productId);
 			if (pStmt.executeUpdate() != 1)
-				throw new SystemException("Couldn't delete product with id " + productId);
+			{
+				throw new ProductNotFoundException(productId);
+			}	
 		} catch (SQLException e)
 		{
 			throw new SystemException("Couldn't delete product with id " + productId, e);
@@ -86,7 +92,11 @@ public class ProductRepositoryJdbcBean implements ProductRepository
 			{
 				if (resultSet.next())
 				{
-					return buildProductDetails(resultSet);
+					ProductDetails buildProductDetails = buildProductDetails(resultSet);
+					if (!resultSet.next())
+					{
+						return buildProductDetails;
+					}
 				}
 			}
 		} catch (SQLException e)
@@ -117,7 +127,7 @@ public class ProductRepositoryJdbcBean implements ProductRepository
 			{
 				products.add(buildProductDetails(resultSet));
 			}
-			
+
 		} catch (SQLException e)
 		{
 			throw new SystemException("Couldn't read products.", e);

@@ -11,12 +11,12 @@ public interface ProductRepository
 
 	public void persist(ProductDetails product);
 	
-	public void merge(ProductDetails product);
+	public void merge(ProductDetails product) throws ProductNotFoundException;
 
-	public void delete(Long productId);
+	public void delete(Long productId) throws ProductNotFoundException;
 
 	public ProductDetails find(Long productId) throws ProductNotFoundException;
 
-	public List<Product> findAll();
+	public List<? extends Product> findAll();
 
 }
