@@ -26,13 +26,13 @@ public class ProductRepositoryFileBeanTest
 		repository = context.getBean("productRepositoryFile", ProductRepository.class);
 		System.out.println(repository.getClass().getName());
 	}
-	
+
 	@After
 	public void tearDown()
 	{
 		new File("./target/product.data").delete();
 	}
-	
+
 	@Test
 	public void testPersist()
 	{
@@ -40,7 +40,7 @@ public class ProductRepositoryFileBeanTest
 		repository.persist(product);
 		assertNotNull(product.getId());
 	}
-	
+
 	@Test
 	public void testFind() throws ProductNotFoundException
 	{
@@ -49,10 +49,10 @@ public class ProductRepositoryFileBeanTest
 		assertNotNull(repository.find(product.getId()));
 	}
 
-	@Test(expected=ProductNotFoundException.class)
+	@Test(expected = ProductNotFoundException.class)
 	public void testNotFind() throws ProductNotFoundException
 	{
 		repository.find(-1l);
 	}
-	
+
 }
