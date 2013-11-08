@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
 import de.swm.auction.dao.ProductRepository;
+import de.swm.auction.dao.RepositoryUtils;
 import de.swm.auction.exceptions.ProductNotFoundException;
 import de.swm.auction.model.Product;
 import de.swm.auction.model.ProductDetails;

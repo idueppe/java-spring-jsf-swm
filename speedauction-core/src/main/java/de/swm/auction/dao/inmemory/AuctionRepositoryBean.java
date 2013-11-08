@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import de.swm.auction.api.AuctionState;
 import de.swm.auction.dao.AuctionRepository;
+import de.swm.auction.dao.RepositoryUtils;
 import de.swm.auction.exceptions.AuctionNotFoundException;
 import de.swm.auction.model.Auction;
 

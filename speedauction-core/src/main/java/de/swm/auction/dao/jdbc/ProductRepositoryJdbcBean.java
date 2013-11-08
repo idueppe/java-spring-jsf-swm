@@ -10,6 +10,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import de.swm.auction.dao.ProductRepository;
+import de.swm.auction.dao.RepositoryUtils;
 import de.swm.auction.exceptions.ProductNotFoundException;
 import de.swm.auction.exceptions.SystemException;
 import de.swm.auction.model.Product;
@@ -32,7 +33,7 @@ public class ProductRepositoryJdbcBean implements ProductRepository
 		try (Connection connection = dataSource.getConnection(); //
 				PreparedStatement pStmt = connection.prepareStatement(INSERT_SQL);)
 		{
-			product.setId(System.currentTimeMillis());
+			product.setId(RepositoryUtils.nextId());
 			pStmt.setLong(1, product.getId());
 			pStmt.setString(2, product.getTitle());
 			pStmt.setString(3, product.getDescription());
