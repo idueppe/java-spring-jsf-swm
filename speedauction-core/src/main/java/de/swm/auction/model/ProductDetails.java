@@ -3,6 +3,8 @@ package de.swm.auction.model;
 public class ProductDetails extends Product
 {
 
+	private static final long serialVersionUID = 1L;
+	
 	private String description;
 
 	public String getDescription()
