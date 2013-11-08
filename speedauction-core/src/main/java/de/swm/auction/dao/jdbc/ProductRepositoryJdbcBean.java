@@ -18,7 +18,7 @@ import de.swm.auction.model.ProductDetails;
 public class ProductRepositoryJdbcBean implements ProductRepository
 {
 
-	private final static String INSERT_SQL = "INSERT INTO product (id, title, description) VALUE (?,?,?)";
+	private final static String INSERT_SQL = "INSERT INTO product (id, title, description) VALUES (?,?,?)";
 	private final static String UPDATE_SQL = "UPDATE product set title=?, description=? WHERE id=?";
 	private final static String DELETE_SQL = "DELETE FROM product WHERE id = ?";
 	private final static String FIND_BY_ID = "SELECT id,title,description FROM product WHERE id=?";
