@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
@@ -54,7 +55,7 @@ public class ProductRepositorySpringJdbcBean extends NamedParameterJdbcDaoSuppor
 	@Override
 	public void merge(ProductDetails product) throws ProductNotFoundException
 	{
-		String sql = "UPDATE Product SET title = :title, description = :description WHERE id = :id";
+		String sql = "UPDATE Product SET title = :title, description = :description  WHERE id = :id";
 		SqlParameterSource paramMap = new BeanPropertySqlParameterSource(product);
 		getNamedParameterJdbcTemplate().update(sql, paramMap);
 	}
@@ -62,8 +63,8 @@ public class ProductRepositorySpringJdbcBean extends NamedParameterJdbcDaoSuppor
 	@Override
 	public void delete(Long productId) throws ProductNotFoundException
 	{
-		// TODO Auto-generated method stub
-
+		String sql = "DELETE FROM Product WHERE id = :id";
+		getNamedParameterJdbcTemplate().update(sql, new MapSqlParameterSource("id",productId));
 	}
 
 	@Override
@@ -84,7 +85,19 @@ public class ProductRepositorySpringJdbcBean extends NamedParameterJdbcDaoSuppor
 	public List<? extends Product> findAll()
 	{
 		String sql = "SELECT id, title, description FROM product";
-		return getNamedParameterJdbcTemplate().query(sql, productDetailsRowMapper);
+		RowMapperResultSetExtractor<ProductDetails> rse = new RowMapperResultSetExtractor<>(productDetailsRowMapper, 50);
+		return getNamedParameterJdbcTemplate().query(sql, rse);
 	}
+//	
+//	public void addNewProductDetails(List<? super ProductDetails> list)
+//	{
+//		list.add(new ProductDetails());
+//	}
+//	
+//	public void readProductList(List<? extends Product> list)
+//	{
+//		System.out.println(list.get(0));
+//	}
+//	
 
 }
