@@ -1,5 +1,6 @@
 package de.swm.auction.model;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -131,6 +132,9 @@ public class Auction
 		}
 	}
 
-
+	public List<Bid> getBids()
+	{
+		return Collections.unmodifiableList(bids);
+	}
 
 }
