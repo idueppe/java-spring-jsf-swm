@@ -4,13 +4,18 @@ import java.util.Date;
 
 public class Bid
 {
+	
+	private Long id;
+	
 	private double amount;
 
 	private Date created;
 
 	private String email;
 	
-	public Bid() {}
+	public Bid() {
+		this.created = new Date();
+	}
 
 	public Bid(double amount, String email)
 	{
@@ -18,7 +23,7 @@ public class Bid
 		this.email = email;
 		this.created = new Date();
 	}
-
+	
 	public double getAmount()
 	{
 		return amount;
@@ -58,4 +63,15 @@ public class Bid
 	{
 		return this.amount > amount;
 	}
+
+	public Long getId()
+	{
+		return id;
+	}
+
+	public void setId(Long id)
+	{
+		this.id = id;
+	}
+
 }
