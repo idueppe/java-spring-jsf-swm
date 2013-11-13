@@ -9,6 +9,13 @@ public class Product implements Serializable
 	private Long id;
 	private String title;
 
+	public Product(){}
+	
+	public Product(long id)
+	{
+		this.id = id;
+	}
+
 	public Long getId()
 	{
 		return id;
