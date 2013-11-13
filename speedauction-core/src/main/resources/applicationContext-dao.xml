@@ -15,6 +15,8 @@
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
+	<bean id="bidRepository" class="de.swm.auction.dao.jdbc.BidRepositorySpringJdbcBean">
+		<property name="dataSource" ref="dataSource"/>
 	</bean>
 
 		<property name="dataSource" ref="dataSource"/>
