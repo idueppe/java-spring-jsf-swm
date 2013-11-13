@@ -18,7 +18,8 @@ import de.swm.auction.spring.framework.jdbc.MapBeanPropertySqlParameterSource;
 public class BidRepositorySpringJdbcBean extends NamedParameterJdbcDaoSupport implements BidRepository
 {
 
-	private RowMapper<Bid> rowMapper = new RowMapper<Bid>() {
+	private RowMapper<Bid> rowMapper = new RowMapper<Bid>()
+	{
 
 		@Override
 		public Bid mapRow(ResultSet rs, int rowNum) throws SQLException
@@ -29,7 +30,8 @@ public class BidRepositorySpringJdbcBean extends NamedParameterJdbcDaoSupport im
 			bid.setCreated(rs.getDate("created"));
 			bid.setEmail(rs.getString("email"));
 			return bid;
-		}};
+		}
+	};
 
 	@Override
 	public void persist(Bid bid, Long auctionId)
@@ -41,11 +43,11 @@ public class BidRepositorySpringJdbcBean extends NamedParameterJdbcDaoSupport im
 //			.addValue("amount", bid.getAmount()) //
 //			.addValue("auctionId", auctionId); //
 		
-		SqlParameterSource paramSource = new MapBeanPropertySqlParameterSource(bid)
-			.addValue("auctionId", auctionId);
+		SqlParameterSource paramSource = new MapBeanPropertySqlParameterSource(bid).addValue("auctionId", auctionId);
 		
 		KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
-		String[] keyColumnNames = new String[]{"id"};
+		String[] keyColumnNames = new String[]
+		{ "id" };
 		getNamedParameterJdbcTemplate().update(sql, paramSource, generatedKeyHolder, keyColumnNames);
 		bid.setId(generatedKeyHolder.getKey().longValue());
 	}
