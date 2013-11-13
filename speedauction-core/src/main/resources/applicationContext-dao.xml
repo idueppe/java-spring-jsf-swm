@@ -9,23 +9,14 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-	<!-- Importieren der Spring Konfiguration aus applicationContext -->
-	<import resource="classpath:/applicationContext.xml"/>
+	<import resource="classpath:/applicationContext-db.xml"/>
 	
-	<!-- Definition einer Property Datei -->
-	<context:property-placeholder location="classpath:jdbc.properties"/>
+	<bean id="productRepository" class="de.swm.auction.dao.jdbc.ProductRepositorySpringJdbcBean">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
 	
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		 <!-- Hier werden die Properties aus jdbc.properties verwendet -->
-		<property name="url" value="${jdbcUrl}"/>
-		<property name="username" value="${jdbcUsername}"/>
-		<property name="password" value="${jdbcPassword}"/>
-		<property name="maxActive" value="10"/>
-		<property name="minIdle" value="2"/>
-		<property name="validationQuery" value="${jdbcValidationQuery}"/>
 	</bean>
 
-	<bean id="productRepository" class="de.swm.auction.dao.jdbc.ProductRepositorySpringJdbcBean">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 
