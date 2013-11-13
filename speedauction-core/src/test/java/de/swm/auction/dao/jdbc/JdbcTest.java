@@ -14,6 +14,10 @@ public class JdbcTest
 {
 
 	private static long nextId = System.currentTimeMillis();
+	
+	private static final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+	private static final String JDBC_USERNAME = "hr";
+	private static final String JDBC_PASSWORD = "oracle";
 
 	public static long nextId()
 	{
@@ -90,11 +94,7 @@ public class JdbcTest
 
 	private Connection openConnection() throws SQLException
 	{
-		String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:orcl";
-		String jdbcUsername = "hr";
-		String jdbcPassword = "oracle";
-
-		return DriverManager.getConnection(jdbcUrl, jdbcUsername, jdbcPassword);
+		return DriverManager.getConnection(JDBC_URL, JDBC_USERNAME, JDBC_PASSWORD);
 	}
 
 }
