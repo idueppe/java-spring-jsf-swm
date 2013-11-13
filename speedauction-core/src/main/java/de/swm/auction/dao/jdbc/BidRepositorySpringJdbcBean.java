@@ -37,14 +37,14 @@ public class BidRepositorySpringJdbcBean extends NamedParameterJdbcDaoSupport im
 	public void persist(Bid bid, Long auctionId)
 	{
 		String sql = "INSERT INTO bid (id, email, amount, created, auction_id) VALUES (SPEEDAUCTION.nextVal, :email, :amount, :created, :auctionId)";
-//		SqlParameterSource paramSource = new MapSqlParameterSource() //
-//			.addValue("email", bid.getEmail()) //
-//			.addValue("created", bid.getCreated()) //
-//			.addValue("amount", bid.getAmount()) //
-//			.addValue("auctionId", auctionId); //
-		
+		// SqlParameterSource paramSource = new MapSqlParameterSource() //
+		// .addValue("email", bid.getEmail()) //
+		// .addValue("created", bid.getCreated()) //
+		// .addValue("amount", bid.getAmount()) //
+		// .addValue("auctionId", auctionId); //
+
 		SqlParameterSource paramSource = new MapBeanPropertySqlParameterSource(bid).addValue("auctionId", auctionId);
-		
+
 		KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
 		String[] keyColumnNames = new String[]
 		{ "id" };
@@ -55,8 +55,11 @@ public class BidRepositorySpringJdbcBean extends NamedParameterJdbcDaoSupport im
 	@Override
 	public List<Bid> findByAuction(Long auctionId)
 	{
-		String sql = "SELECT id, email, amount, created FROM bid WHERE auction_id = :auctionId";
-		SqlParameterSource paramSource = new MapSqlParameterSource("auctionId",auctionId);
+		String sql = "SELECT id, email, amount, created " //
+				+ "FROM bid " //
+				+ "WHERE auction_id = :auctionId " //
+				+ "ORDER BY amount ASC";
+		SqlParameterSource paramSource = new MapSqlParameterSource("auctionId", auctionId);
 		return getNamedParameterJdbcTemplate().query(sql, paramSource, rowMapper);
 	}
 

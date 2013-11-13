@@ -10,16 +10,19 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
 	<import resource="classpath:/applicationContext-db.xml"/>
-	
+
 	<bean id="productRepository" class="de.swm.auction.dao.jdbc.ProductRepositorySpringJdbcBean">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
-	
+
 	<bean id="bidRepository" class="de.swm.auction.dao.jdbc.BidRepositorySpringJdbcBean">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
-
+	
+	<bean id="auctionRepository" class="de.swm.auction.dao.jdbc.AuctionRepositorySpringJdbcBean">
 		<property name="dataSource" ref="dataSource"/>
+		<property name="bidRepository" ref="bidRepository"/>
 	</bean>
-
+	
+	
 </beans>
