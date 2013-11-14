@@ -47,6 +47,7 @@ public class AuctionRepositorySpringJdbcBeanTest
 		Auction found = repository.find(auction.getId());
 		// then
 		assertEquals(6.0, found.getHighestBid().getAmount(), 0.001);
+		assertEquals("unit product", found.getProduct().getTitle());
 		
 	}
 
@@ -54,6 +55,7 @@ public class AuctionRepositorySpringJdbcBeanTest
 	{
 		Product product = new Product();
 		product.setId(-10L);
+		product.setTitle("unit product");
 		return product;
 	}
 
