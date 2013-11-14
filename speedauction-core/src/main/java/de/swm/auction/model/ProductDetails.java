@@ -7,6 +7,15 @@ public class ProductDetails extends Product
 	
 	private String description;
 
+	public ProductDetails()
+	{
+	}
+	
+	public ProductDetails(String title)
+	{
+		setTitle(title);
+	}
+
 	public String getDescription()
 	{
 		return description;

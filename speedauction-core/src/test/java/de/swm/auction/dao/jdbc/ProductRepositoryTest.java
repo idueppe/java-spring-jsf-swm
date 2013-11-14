@@ -28,6 +28,7 @@ public class ProductRepositoryTest
 	public void testThatProductIdIsSetAfterPersist()
 	{
 		ProductDetails product = new ProductDetails();
+		product.setTitle("title");
 		assertNull("Id should be null before a domain object is persisted.",product.getId());
 		productRepository.persist(product);
 		assertNotNull("Id must not be null after a domain object is persisted.",product.getId());
@@ -37,6 +38,7 @@ public class ProductRepositoryTest
 	public void testThatProductCanBeFoundAfterPersist() throws ProductNotFoundException
 	{
 		ProductDetails product = new ProductDetails();
+		product.setTitle("title");
 		productRepository.persist(product);
 		ProductDetails found = productRepository.find(product.getId());
 		assertEquals(product, found);
@@ -46,6 +48,7 @@ public class ProductRepositoryTest
 	public void testThatIsDeletedAndCannotBeFoundAgain() throws ProductNotFoundException
 	{
 		ProductDetails product = new ProductDetails();
+		product.setTitle("title");
 		productRepository.persist(product);
 		productRepository.delete(product.getId());
 		productRepository.find(product.getId());
@@ -56,9 +59,9 @@ public class ProductRepositoryTest
 	{
 		int numberOfProducts = productRepository.findAll().size();
 		assertNotNull(productRepository.findAll());
-		productRepository.persist(new ProductDetails());
+		productRepository.persist(new ProductDetails("junit@test.title"));
 		assertFalse(productRepository.findAll().isEmpty());
-		productRepository.persist(new ProductDetails());
+		productRepository.persist(new ProductDetails("junit@test.title"));
 		assertEquals(numberOfProducts+2, productRepository.findAll().size());
 	}
 	
