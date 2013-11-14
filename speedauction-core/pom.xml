@@ -6,25 +6,28 @@
 	<version>1.0.0-SNAPSHOT</version>
 
 	<repositories>
-		<!-- <repository> -->
-		<!-- <id>SWMRemote</id> -->
-		<!-- <name>SWMRemote</name> -->
-		<!-- <url>http://nexus.intra.swm.de/nexus/content/groups/remote-repositories</url> -->
-		<!-- </repository> -->
-		<!-- <repository> -->
-		<!-- <id>SWM</id> -->
-		<!-- <name>SWM</name> -->
-		<!-- <url>http://nexus.intra.swm.de/nexus/content/groups/swm-repositories</url> -->
-		<!-- </repository> -->
+		<repository>
+			<id>SWMRemote</id>
+			<name>SWMRemote</name>
+			<url>http://nexus.intra.swm.de/nexus/content/groups/remote-repositories</url>
+		</repository>
+		<repository>
+			<id>SWM</id>
+			<name>SWM</name>
+			<url>http://nexus.intra.swm.de/nexus/content/groups/swm-repositories</url>
+		</repository>
 		<repository>
 			<id>springsource-repo</id>
 			<name>SpringSource Repository</name>
 			<url>http://repo.springsource.org/release</url>
 		</repository>
 		<repository>
-			<id>repository.jboss.org</id>
-			<name>JBoss Repository</name>
-			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+			<id>jboss</id>
+			<url>https://repository.jboss.org/nexus/content/repositories/releases</url>
+		</repository>
+		<repository>
+			<id>jboss-thrirdparty-releases</id>
+			<url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases</url>
 		</repository>
 	</repositories>
 
