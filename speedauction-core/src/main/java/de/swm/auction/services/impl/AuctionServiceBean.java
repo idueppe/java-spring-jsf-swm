@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.swm.auction.api.AuctionState;
 import de.swm.auction.dao.AuctionRepository;
@@ -22,11 +24,12 @@ import de.swm.auction.services.AuctionService;
 import de.swm.auction.services.ProductService;
 
 @Component("auctionService")
+@Transactional
 public class AuctionServiceBean implements AuctionService
 {
 	@Autowired
 	private AuctionRepository auctionRepository;
-	
+
 	@Autowired
 	private ProductService productService;
 
@@ -36,23 +39,30 @@ public class AuctionServiceBean implements AuctionService
 	{
 		Long productId = productService.registerProduct(title, description);
 		Product product = productService.find(productId);
-		
+
 		Auction auction = new Auction();
 		auction.setStartDate(startTime);
 		auction.setEndDate(endTime);
 		auction.setMinimumBidding(minimumBidding);
 		auction.setProduct(product);
-		
+
 		auctionRepository.persist(auction);
-		
+
 		return auction.getId();
+	}
+
+	@Override
+	public Long registerAuctionWithoutTX(Date startTime, Date endTime, double minimumBidding, String title, String description)
+			throws ProductNotFoundException, InvalidAuctionTimeException
+	{
+		return registerAuction(startTime, endTime, minimumBidding, title, description);
 	}
 
 	@Override
 	public AuctionDTO findAuction(Long auctionId) throws AuctionNotFoundException
 	{
 		return convertToDto(auctionRepository.find(auctionId));
-	
+
 	}
 
 	private AuctionDTO convertToDto(Auction auction)
@@ -66,7 +76,7 @@ public class AuctionServiceBean implements AuctionService
 		dto.setState(auction.getState());
 		return dto;
 	}
-	
+
 	private List<AuctionDTO> convertToDto(List<Auction> auctions)
 	{
 		List<AuctionDTO> dtos = new LinkedList<>();
@@ -80,13 +90,14 @@ public class AuctionServiceBean implements AuctionService
 	@Override
 	public void bid(Long auctionId, double amount, String email) throws AuctionNotFoundException, AuctionIsExpiredException,
 			BidTooLowException
-	{	
+	{
 		Auction auction = auctionRepository.find(auctionId);
 		if (auction.isActive())
 		{
 			auction.addBid(new Bid(amount, email));
 			auctionRepository.merge(auction);
-		} else {
+		} else
+		{
 			throw new AuctionIsExpiredException();
 		}
 	}
@@ -119,11 +130,10 @@ public class AuctionServiceBean implements AuctionService
 	{
 		this.auctionRepository = auctionRepository;
 	}
-	
+
 	public void setProductService(ProductService productService)
 	{
 		System.out.println("--------------------------- SET PRODUCT SERVICE -----------");
 		this.productService = productService;
 	}
 }
-

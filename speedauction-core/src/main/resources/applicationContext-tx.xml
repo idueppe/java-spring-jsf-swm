@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+
+	<import resource="classpath:/applicationContext-dao.xml" />
+
+	<context:annotation-config />
+	<!-- <context:component-scan base-package="de.swm"/> -->
+
+	<tx:annotation-driven />
+
+	<bean id="proxyCreator" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+<!-- 				<value>auctionService</value> -->
+				<value>*Repository</value>
+			</list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+<!-- 				<value>benchmarkAdvisor</value> -->
+				<value>logInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	
+<!-- 	<bean id="benchmarkAdvisor"	class="org.springframework.aop.support.DefaultPointcutAdvisor"> -->
+<!-- 		<property name="pointcut"> -->
+<!-- 			<bean class="org.springframework.aop.TruePointcut" /> -->
+<!-- 		</property> -->
+<!-- 		<property name="advice" ref="logInterceptor"/> -->
+<!-- 	</bean> -->
+
+	<bean id="logInterceptor" class="de.swm.auction.services.LogInterceptor" />
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+</beans>

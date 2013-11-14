@@ -26,5 +26,8 @@ public interface AuctionService
 	public List<AuctionDTO> allExpiredAuctions();
 	
 	public List<AuctionDTO> allWonAuctions(String email);
+
+	public abstract Long registerAuctionWithoutTX(Date startTime, Date endTime, double minimumBidding, String title, String description)
+			throws ProductNotFoundException, InvalidAuctionTimeException;
 	
 }

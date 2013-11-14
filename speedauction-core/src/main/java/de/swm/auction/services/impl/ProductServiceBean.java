@@ -16,9 +16,6 @@ public class ProductServiceBean implements ProductService
 	@Autowired
 	private ProductRepository productRepository; 
 	
-	@Autowired
-	private AuctionService auctionService;
-	
 	@Override
 	public Long registerProduct(String title, String description)
 	{
