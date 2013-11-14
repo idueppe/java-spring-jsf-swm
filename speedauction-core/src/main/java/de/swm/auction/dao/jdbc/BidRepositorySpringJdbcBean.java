@@ -32,6 +32,15 @@ public class BidRepositorySpringJdbcBean extends NamedParameterJdbcDaoSupport im
 			return bid;
 		}
 	};
+	
+	@Override
+	public void persist(List<Bid> bids, Long auctionId)
+	{
+		for (Bid bid : bids)
+		{
+			persist(bid, auctionId);
+		}
+	}
 
 	@Override
 	public void persist(Bid bid, Long auctionId)

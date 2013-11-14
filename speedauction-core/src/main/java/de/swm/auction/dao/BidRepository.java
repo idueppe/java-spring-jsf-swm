@@ -6,8 +6,11 @@ import de.swm.auction.model.Bid;
 
 public interface BidRepository
 {
-	void persist(Bid bid, Long auctionId);
+	public void persist(Bid bid, Long auctionId);
 
+	public void persist(List<Bid> bids, Long auctionId);
+	
 	public List<Bid> findByAuction(Long auctionId);
+	
 
 }

@@ -38,6 +38,7 @@ public class AuctionRepositorySpringJdbcBean extends NamedParameterJdbcDaoSuppor
 			auction.setOwner(rs.getString("owner"));
 			auction.setMinimumBidding(rs.getDouble("minimum_bid"));
 			auction.setProduct(new Product(rs.getLong("product_id")));
+			auction.getProduct().setTitle(rs.getString("title"));
 			return auction;
 		}
 
@@ -62,17 +63,9 @@ public class AuctionRepositorySpringJdbcBean extends NamedParameterJdbcDaoSuppor
 
 		auction.setId(keyholder.getKey().longValue());
 
-		persistBids(auction);
+		bidRepository.persist(auction.getBids(), auction.getId());
 
 		return auction.getId();
-	}
-
-	private void persistBids(Auction auction)
-	{
-		for (Bid bid : auction.getBids())
-		{
-			bidRepository.persist(bid, auction.getId());
-		}
 	}
 
 	@Override
@@ -90,7 +83,10 @@ public class AuctionRepositorySpringJdbcBean extends NamedParameterJdbcDaoSuppor
 	@Override
 	public Auction find(Long auctionId) throws AuctionNotFoundException
 	{
-		String sql = "SELECT id, product_id, startdate, enddate, owner, minimum_bid FROM auction WHERE id = :id";
+		String sql = "SELECT a.id, a.product_id, p.title, a.startdate, a.enddate, a.owner, a.minimum_bid" //
+				+ " FROM auction a"
+				+ " LEFT OUTER JOIN product p ON p.id = a.product_id "
+				+ " WHERE a.id = :id";
 		SqlParameterSource params = new MapSqlParameterSource("id", auctionId);
 		Auction auction = getNamedParameterJdbcTemplate().queryForObject(sql, params, auctionRowMapper);
 
