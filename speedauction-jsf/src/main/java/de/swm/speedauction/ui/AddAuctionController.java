@@ -31,14 +31,14 @@ public class AddAuctionController implements Serializable
 	public String addAuction() throws ProductNotFoundException, InvalidAuctionTimeException
 	{
 		auctionService.registerAuction(startTime, endTime, minimumBidding, title, description);
-		return "/view/auctions";
+		return "/views/auctions";
 	}
 	
 	public String cancelAdding()
 	{
 		startTime = null;
 		// und so weiter..
-		return "/view/auctions";
+		return "/views/auctions";
 	}
 
 	public Date getStartTime()
