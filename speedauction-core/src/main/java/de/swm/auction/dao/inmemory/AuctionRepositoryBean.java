@@ -78,4 +78,11 @@ public class AuctionRepositoryBean implements AuctionRepository
 		return found;
 	}
 
+	@Override
+	public List<Auction> findAll() throws AuctionNotFoundException
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

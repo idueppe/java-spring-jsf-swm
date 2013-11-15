@@ -2,6 +2,7 @@ package de.swm.auction.dao.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
@@ -95,6 +96,21 @@ public class AuctionRepositorySpringJdbcBean extends NamedParameterJdbcDaoSuppor
 		return auction;
 	}
 
+	public List<Auction> findAll() throws AuctionNotFoundException
+	{
+		String sql = "SELECT a.id, a.product_id, p.title, a.startdate, a.enddate, a.owner, a.minimum_bid" //
+				+ " FROM auction a"
+				+ " LEFT OUTER JOIN product p ON p.id = a.product_id ";
+		List<Auction> auctions = getNamedParameterJdbcTemplate().query(sql, auctionRowMapper);
+		
+		for (Auction auction : auctions)
+		{
+			loadBidsOfAuction(auction);
+		}
+		
+		return auctions;
+	}
+
 	private void loadBidsOfAuction(Auction auction)
 	{
 		List<Bid> bids = bidRepository.findByAuction(auction.getId());
@@ -116,10 +132,18 @@ public class AuctionRepositorySpringJdbcBean extends NamedParameterJdbcDaoSuppor
 	}
 
 	@Override
-	public List<Auction> findByState(AuctionState state)
+	public List<Auction> findByState(AuctionState state) throws AuctionNotFoundException
 	{
-		// TODO Auto-generated method stub
-		return null;
+		List<Auction> found = new LinkedList<>();
+		
+		for (Auction auction : findAll())
+		{
+			if (auction.getState() == state)
+			{
+				found.add(auction);
+			}
+		}
+		return found;
 	}
 
 	@Override

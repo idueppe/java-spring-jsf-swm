@@ -100,21 +100,27 @@ public class AuctionServiceBean implements AuctionService
 			throw new AuctionIsExpiredException();
 		}
 	}
-
+	
 	@Override
-	public List<AuctionDTO> allActiveAuctions()
+	public List<AuctionDTO> allAuctions() throws AuctionNotFoundException
+	{
+		return convertToDto(auctionRepository.findAll());
+	}
+	
+	@Override
+	public List<AuctionDTO> allActiveAuctions() throws AuctionNotFoundException
 	{
 		return convertToDto(auctionRepository.findByState(AuctionState.ACTIVE));
 	}
-
+	
 	@Override
-	public List<AuctionDTO> allPendingAuctions()
+	public List<AuctionDTO> allPendingAuctions() throws AuctionNotFoundException
 	{
 		return convertToDto(auctionRepository.findByState(AuctionState.PENDING));
 	}
 
 	@Override
-	public List<AuctionDTO> allExpiredAuctions()
+	public List<AuctionDTO> allExpiredAuctions() throws AuctionNotFoundException
 	{
 		return convertToDto(auctionRepository.findByState(AuctionState.EXPIRED));
 	}

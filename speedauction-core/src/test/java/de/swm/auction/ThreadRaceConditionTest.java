@@ -15,9 +15,7 @@ public class ThreadRaceConditionTest
 		{
 			for (int i = 0; i < 1_000_000_000; i++)
 			{
-				synchronized (ThreadRaceConditionTest.class) {
 					count++;
-				}
 			}
 			
 			System.out.println(Thread.currentThread().getName()+": "+count);

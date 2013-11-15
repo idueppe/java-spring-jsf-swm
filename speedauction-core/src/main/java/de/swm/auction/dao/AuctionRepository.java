@@ -17,8 +17,10 @@ public interface AuctionRepository
 
 	public Auction find(Long auctionId) throws AuctionNotFoundException;
 	
-	public List<Auction> findByState(AuctionState state);
+	public List<Auction> findByState(AuctionState state) throws AuctionNotFoundException;
 	
 	public List<Auction> findByOwner(String ownerEmail);
+
+	public List<Auction> findAll() throws AuctionNotFoundException;
 	
 }

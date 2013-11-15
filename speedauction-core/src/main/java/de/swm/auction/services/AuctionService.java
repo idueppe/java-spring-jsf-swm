@@ -19,15 +19,17 @@ public interface AuctionService
 	
 	public void bid(Long auctionId, double amount, String email) throws AuctionNotFoundException, AuctionIsExpiredException, BidTooLowException;
 	
-	public List<AuctionDTO> allActiveAuctions();
+	public List<AuctionDTO> allActiveAuctions() throws AuctionNotFoundException;
 	
-	public List<AuctionDTO> allPendingAuctions();
+	public List<AuctionDTO> allPendingAuctions() throws AuctionNotFoundException;;
 	
-	public List<AuctionDTO> allExpiredAuctions();
+ 	public List<AuctionDTO> allExpiredAuctions() throws AuctionNotFoundException;;
 	
 	public List<AuctionDTO> allWonAuctions(String email);
 
-	public abstract Long registerAuctionWithoutTX(Date startTime, Date endTime, double minimumBidding, String title, String description)
+	public Long registerAuctionWithoutTX(Date startTime, Date endTime, double minimumBidding, String title, String description)
 			throws ProductNotFoundException, InvalidAuctionTimeException;
+
+	public List<AuctionDTO> allAuctions() throws AuctionNotFoundException;
 	
 }

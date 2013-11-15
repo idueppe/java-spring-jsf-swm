@@ -75,6 +75,12 @@ public class AuctionServiceBeanMockTest
 		{
 			return null;
 		}
+
+		@Override
+		public List<Auction> findAll() throws AuctionNotFoundException
+		{
+			return null;
+		}
 		
 	}
 
