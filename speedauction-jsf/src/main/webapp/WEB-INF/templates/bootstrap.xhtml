@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:ui="http://java.sun.com/jsf/facelets">
+   <h:head>
+      <title>SpeedAuction</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       <h:outputStylesheet name="css/bootstrap.css"/>
+       <h:outputStylesheet name="css/bootstrap-responsive.css"/>
+       <h:outputStylesheet name="css/vehicle.css"/>
+   </h:head>
+   <h:body>
+       <div class="container">
+           <div class="masthead">
+                <ui:insert name="navigation">
+                    [Template Content for Navigation will be insert here.]
+                </ui:insert>
+                <h3 class="muted">SpeedAuction</h3>
+           </div>
+           <hr/>
+
+           <ui:insert name="main">
+               [Template Content for main will be insert here.]
+           </ui:insert>
+
+           <hr/>
+           <div class="footer">
+               <ui:insert name="footer">
+                    <p>&copy; by Crowdcode</p>
+               </ui:insert>
+		      <p>
+		      	Debugging: Ctrl+Shift+D<ui:debug hotkey="d" rendered="true"/>
+		      </p>
+           </div>
+       </div>
+      <h:outputScript name="js/jquery.js"/>
+      <h:outputScript name="js/bootstrap.js"/>
+      
+   </h:body>
+</html>
