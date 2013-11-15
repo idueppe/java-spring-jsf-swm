@@ -26,7 +26,7 @@ public class ProductServlet extends HttpServlet
 	private static final long serialVersionUID = 1L;
 	
 	private ProductService productService;
-
+	
 	@Override
 	public void init(ServletConfig config) throws ServletException
 	{
@@ -41,20 +41,22 @@ public class ProductServlet extends HttpServlet
 		try
 		{
 			Long productId = Long.parseLong(req.getParameter("id"));
-			ProductDetails details = productService.findDetails(new Product(productId));
+			ProductDetails product = productService.findDetails(new Product(productId));
+			
+			resp.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = resp.getWriter();
-			out.println("<html><body>");
-			out.println("<h3>Product</h3>");
-			out.println("<br/>"+details.getTitle());
-			out.println("<br/>"+details.getDescription());
-			out.println("<br/><a href=\"products\">Übersicht</a>");
+			out.println("<html><body><h3>Product</h3>");
+			
+			
+			out.print("<br/>"+product.getTitle());
+			out.print("<br/>"+product.getDescription());
+		
+			out.print("<br/><a href=\"products\">Übersicht</a>");
 			out.println("</body></html>");
 		} catch (ProductNotFoundException e)
 		{
 			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
 		}
-		
-		
 	}
 
 }
