@@ -1,5 +1,7 @@
 package de.swm.auction.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -7,7 +9,6 @@ import de.swm.auction.dao.ProductRepository;
 import de.swm.auction.exceptions.ProductNotFoundException;
 import de.swm.auction.model.Product;
 import de.swm.auction.model.ProductDetails;
-import de.swm.auction.services.AuctionService;
 import de.swm.auction.services.ProductService;
 
 @Component("productService")
@@ -41,6 +42,13 @@ public class ProductServiceBean implements ProductService
 	public void setProductRepository(ProductRepository productRepository)
 	{
 		this.productRepository = productRepository;
+	}
+
+	@Override
+	public List<? extends Product> findAll()
+	{
+		// FIXME idueppe - return Dto objects
+		return this.productRepository.findAll();
 	}
 	
 }
