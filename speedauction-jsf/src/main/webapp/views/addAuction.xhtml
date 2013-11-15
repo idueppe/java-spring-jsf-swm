@@ -54,9 +54,9 @@
 				<f:validateDoubleRange minimum="1" maximum="10000000"/>
 			</h:inputText>
 			<h:message for="minbidding"/>
-			
-			<h:commandButton value="Add" action="#{addAuctionController.addAuction()}" />
-			<h:commandButton value="Cancel" action="#{addAuctionController.cancelAdding()}" immediate="true"/>
+			<br/>
+			<h:commandButton value="Add" action="#{addAuctionController.addAuction()}" styleClass="btn btn-success" />
+			<h:commandButton value="Cancel" action="#{addAuctionController.cancelAdding()}" immediate="true" styleClass="btn btn-danger"/>
 			
 		</h:form>
 	</ui:define>
