@@ -17,6 +17,7 @@
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		 <!-- Hier werden die Properties aus jdbc.properties verwendet -->
+		<property name="driverClassName" value="${jdbcDriverClassName}"/>
 		<property name="url" value="${jdbcUrl}"/>
 		<property name="username" value="${jdbcUsername}"/>
 		<property name="password" value="${jdbcPassword}"/>
