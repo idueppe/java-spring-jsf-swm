@@ -18,6 +18,7 @@
     	<navigation-case>
     		<from-outcome>startAddingAuction</from-outcome>
     		<to-view-id>/views/addAuction.xhtml</to-view-id>
+    		<redirect></redirect>
     	</navigation-case>
     </navigation-rule>
 
