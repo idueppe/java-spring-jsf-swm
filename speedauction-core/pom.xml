@@ -54,7 +54,6 @@
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc16</artifactId>
 			<version>11.2.0.3</version>
-			<optional>true</optional>
 		</dependency>
 
 		<!-- Dependencies for Spring -->
