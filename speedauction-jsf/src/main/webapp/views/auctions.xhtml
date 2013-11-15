@@ -19,28 +19,30 @@
         <h:messages infoClass="text-info" errorClass="text-error" warnClass="text-warning" showSummary="true" showDetail="false" />
         <h:form>
             <h:dataTable styleClass="table table-striped" value="#{auctionController.auctions}" var="auction">
-                <h:column >
+                <h:column>
                     <f:facet name="header">
-                        #
+                        <small>#</small> 
                     </f:facet>
-                    #{auction.auctionId}
+                    <h:outputText value="#{auction.auctionId}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
                         ProductTitle
                     </f:facet>
-                    #{auction.productTitle}
+                    <h:outputText value="#{auction.productTitle}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
                         HighestBid
                     </f:facet>
                     <h:outputText value="#{auction.highestBid}">
-                    	<f:convertNumber />
+                    	<f:convertNumber minFractionDigits="2" />
                     </h:outputText>
                 </h:column>
             </h:dataTable>
             <hr/>
+            
+            <h:commandButton value="Add Auction" action="#{auctionController.startAddingAuction()}" />
         </h:form>
     </ui:define>
 </ui:composition>

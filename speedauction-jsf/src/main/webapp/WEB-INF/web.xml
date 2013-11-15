@@ -18,6 +18,7 @@
     	<param-name>javax.faces.FACELETS_DEVELOPMENT</param-name>
     	<param-value>true</param-value>
 	</context-param>
+
     <!--
     <context-param>
         <param-name>contextClass</param-name>
@@ -28,12 +29,6 @@
     <listener>
         <listener-class>
             org.springframework.web.context.ContextLoaderListener
-        </listener-class>
-    </listener>
-
-    <listener>
-        <listener-class>
-            org.springframework.web.context.request.RequestContextListener
         </listener-class>
     </listener>
     

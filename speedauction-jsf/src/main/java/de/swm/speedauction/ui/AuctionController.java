@@ -26,5 +26,11 @@ public class AuctionController implements Serializable
 	{
 		return auctionService.allAuctions();
 	}
+	
+	public String startAddingAuction()
+	{
+		System.out.println("... starting adding");
+		return "startAddingAuction";
+	}
 
 }

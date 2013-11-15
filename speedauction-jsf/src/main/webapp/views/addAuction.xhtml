@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/bootstrap.xhtml">
+
+	<ui:define name="navigation">
+		<h:form>
+			<ul class="nav nav-pills pull-right">
+				<li><h:commandLink action="/views/home">Start</h:commandLink></li>
+				<li class="active"><h:commandLink action="/views/manufacturers">Auctions</h:commandLink></li>
+			</ul>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="main">
+		<h1>Add Auction</h1>
+		<h:messages infoClass="text-info" errorClass="text-error"
+			warnClass="text-warning" showSummary="true" showDetail="false" />
+		<h:form>
+			<h:outputLabel value="Titel" for="title" />
+			<h:inputText id="title" value="#{addAuctionController.title}" />
+			<h:message for="title"/>
+
+			<h:outputLabel value="Beschreibung" for="description" />
+			<h:inputText id="description" value="#{addAuctionController.description}" />
+			<h:message for="description"/>
+			
+			<h:outputLabel value="Startzeit" for="startTime" />
+			<p:calendar id="startTime" 
+				value="#{addAuctionController.startTime}" pattern="MM/dd/yyyy HH:mm" required="true" showOn="button" />
+			<h:message for="startTime"/>
+			
+			<h:outputLabel value="Endzeit" for="endTime" />
+			<p:calendar id="endTime" value="#{addAuctionController.endTime}" pattern="MM/dd/yyyy HH:mm" required="true" showOn="button"/>
+			<h:message for="endTime"/>
+			
+			<h:outputLabel value="Mindestgebot" for="minbidding" />
+			<h:inputText id="minbidding" value="#{addAuctionController.minimumBidding}">
+				<f:convertNumber maxFractionDigits="2"/>
+				<f:validateDoubleRange minimum="1" maximum="10000000"/>
+			</h:inputText>
+			<h:message for="minbidding"/>
+			
+			<h:commandButton value="Add" action="#{addAuctionController.addAuction()}" />
+			<h:commandButton value="Cancel" action="#{addAuctionController.cancelAdding()}" />
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
