@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/WEB-INF/templates/bootstrap.xhtml">
+
+    <ui:define name="navigation">
+        <h:form>
+            <ul class="nav nav-pills pull-right">
+                <li><h:commandLink action="/views/home">Start</h:commandLink></li>
+                <li class="active"><h:commandLink action="/views/manufacturers">Auctions</h:commandLink></li>
+            </ul>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="main">
+        <h1>Auctions</h1>
+        <h:messages infoClass="text-info" errorClass="text-error" warnClass="text-warning" showSummary="true" showDetail="false" />
+        <h:form>
+            <h:dataTable styleClass="table table-striped" value="#{auctionController.auctions}" var="auction">
+                <h:column >
+                    <f:facet name="header">
+                        #
+                    </f:facet>
+                    #{auction.auctionId}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        ProductTitle
+                    </f:facet>
+                    #{auction.productTitle}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        HighestBid
+                    </f:facet>
+                    <h:outputText value="#{auction.highestBid}">
+                    	<f:convertNumber />
+                    </h:outputText>
+                </h:column>
+            </h:dataTable>
+            <hr/>
+        </h:form>
+    </ui:define>
+</ui:composition>
