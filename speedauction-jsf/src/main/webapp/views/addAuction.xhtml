@@ -21,11 +21,13 @@
 			warnClass="text-warning" showSummary="true" showDetail="false" />
 		<h:form>
 			<h:outputLabel value="Titel" for="title" />
-			<h:inputText id="title" value="#{addAuctionController.title}" />
+			<h:inputText id="title" value="#{addAuctionController.title}" required="true" immediate="true"/>
 			<h:message for="title"/>
 
 			<h:outputLabel value="Beschreibung" for="description" />
-			<h:inputText id="description" value="#{addAuctionController.description}" />
+			<h:inputText id="description" value="#{addAuctionController.description}" required="true">
+				<f:validator validatorId="descriptionValidator"/>
+			</h:inputText>
 			<h:message for="description"/>
 			
 			<h:outputLabel value="Startzeit" for="startTime" />
@@ -54,7 +56,7 @@
 			<h:message for="minbidding"/>
 			
 			<h:commandButton value="Add" action="#{addAuctionController.addAuction()}" />
-			<h:commandButton value="Cancel" action="#{addAuctionController.cancelAdding()}" />
+			<h:commandButton value="Cancel" action="#{addAuctionController.cancelAdding()}" immediate="true"/>
 			
 		</h:form>
 	</ui:define>

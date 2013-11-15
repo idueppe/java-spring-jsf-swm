@@ -29,7 +29,7 @@
                     <f:facet name="header">
                         ProductTitle
                     </f:facet>
-                    <h:outputText value="#{auction.productTitle}"/>
+                    <h:outputText value="#{auction.productTitle}" escape="false"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
@@ -42,7 +42,7 @@
             </h:dataTable>
             <hr/>
             
-            <h:commandButton value="Add Auction" action="#{auctionController.startAddingAuction()}" />
+            <h:commandButton value="Add Auction" action="#{addAuctionController.startAddingAuction()}" />
         </h:form>
     </ui:define>
 </ui:composition>

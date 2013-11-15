@@ -43,11 +43,29 @@
 
 <!--     Tell the context which URLs to process as facelets.  -->
 <!--     <servlet-mapping> -->
-<!-- 	    <servlet-name>Faces Servlet</servlet-name> -->
-<!-- 	    <url-pattern>*.jsf</url-pattern> -->
-<!--     </servlet-mapping> -->
+<!--	    <servlet-name>Faces Servlet</servlet-name> -->
+<!--    	<url-pattern>*.jsf</url-pattern> -->
+<!--    </servlet-mapping> -->
 
     <!-- This is an optional parameter, but it makes troubleshooting errors much easier -->
     <!-- You are advised to delete this context parameter before a production deployment -->
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>ProtectedPages</web-resource-name>
+			<url-pattern>/views/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>speedauction</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<login-config>
+		<auth-method>BASIC</auth-method>
+	</login-config>
+	
+	<security-role>
+		<role-name>speedauction</role-name>
+	</security-role>
 
 </web-app>
