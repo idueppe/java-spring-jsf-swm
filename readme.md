@@ -1,5 +1,8 @@
 # Java Basic, Spring, and Web Examples
 
+# Build Status
+[![Build Status](https://travis-ci.org/idueppe/java-spring-jsf-swm.svg?branch=master)](https://travis-ci.org/idueppe/java-spring-jsf-swm)
+
 # License
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">
